@@ -10,6 +10,12 @@
     
     invalid: .asciiz "Invalid input"
 
+    one: 27000
+    
+    two: 900
+
+    three: 30
+
 	.text
 
 
@@ -58,8 +64,12 @@ adjust_base:
 
         j print_invalid
 
+#LABELS TO CONDUCT CALCULATIONS FOR EACH CHAR
 multiply_char:
     
+    beq $t0, 1, first_element
+
+first_element:
     
 
 #LABELS TO CHECK CHARS INSIDE OF BASE RANGE
