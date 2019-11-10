@@ -8,7 +8,7 @@
 
     str: .space 1000
     
-    void: .asciiz "Void"
+    invalid: .asciiz "Invalid input"
 
 	.text
 
@@ -20,7 +20,7 @@ main:
     #READ STRING
     li $v0, 8 #read string
     la $a0, str #load address of string into register $a0
-    li $a1, 1000 #length of expected input including null char
+    li $a1, 5 #length of expected input including null char
     syscall
 
     move $t0, $zero #initializes register $t0 as the index counter
@@ -31,22 +31,22 @@ next_char:
 
     lb $s2, 0($s0) #load char value in register $s0 and put it in $s2
 
-    li $v0, 11 #print char value
-    move $a0, $s2
-    syscall
+# li $v0, 11 #print char value
+#   move $a0, $s2
+#   syscall
 
-check_char:
     beq $s2, 9, print_invalid #checks if char is a tab character
     beq $s2, 10, print_invalid #checks if char is a newline character
     beq $s2, 32, print_invalid #checks if char is a space character
     
     addi $s0, $s0, 1 #increment index by 1
-    bne $t0, 10, next_char #returns to loop1 label if counter in register $s0 != 10
+    bge $t0, 6, print_invalid
+    ble $t0, 4, next_char #returns to loop1 label if counter in register $s0 != 10
     j exit
 
 print_invalid:
     li $v0, 4 #print string
-    la $a0, void
+    la $a0, invalid
     syscall
 
 exit:
