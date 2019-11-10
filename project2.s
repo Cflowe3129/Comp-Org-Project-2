@@ -40,9 +40,9 @@ next_char:
     beq $s2, 10, print_invalid #checks if char is a newline character
     beq $s2, 32, print_invalid #checks if char is a space character
 
-    bge $s2, 120, print_invalid #checks if char lies outside of base range
+    bge $s2, 120, check_outside_base_1 #checks if char lies outside of base range
     bge $s2, 97, check_greater_lower #checks if char is >= a
-    bge $s2, 88, print_invalid #checks if char lies outside of base range
+    bge $s2, 88, check_outside_base_2 #checks if char lies outside of base range
     bge $s2, 65, check_greater_upper #checks if char is >= A
 
     
@@ -50,6 +50,12 @@ next_char:
     bge $t0, 6, print_invalid
     ble $t0, 4, next_char #returns to loop1 label if counter in register $s0 != 10
     j exit
+
+
+check_outside_base_1:
+ble $s2, 127, adjust_base
+j exit
+
 
 print_invalid:
     li $v0, 4 #print string
