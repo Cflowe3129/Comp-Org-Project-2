@@ -55,6 +55,16 @@ adjust_base:
 
         j print_invalid
 
+#LABELS TO CHECK CHARS INSIDE OF BASE RANGE
+
+check_greater_lower:
+
+    bge $s2, 61, adjust_lower
+    j exit
+
+
+#LABELS TO CHECK CHARS OUTSIDE OF BASE RANGE
+
 check_outside_base_1:
         ble $s2, 127, adjust_base
         j exit
@@ -78,5 +88,5 @@ print_invalid:
 
 exit:
 
-li $v0, 10
-syscall
+    li $v0, 10
+    syscall
