@@ -63,6 +63,10 @@ check_outside_base_2:
     ble $s2, 96, adjust_base
     j exit
 
+check_outside_base_3:
+    ble $s2, 64, adjust_base
+    j exit
+
 print_invalid:
     li $v0, 4 #print string
     la $a0, invalid
