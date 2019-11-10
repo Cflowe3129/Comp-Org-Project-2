@@ -31,8 +31,14 @@ main:
     syscall
 
 check_char:
+    beq $s2, 9, print_void
+    beq $s2, 10, print_void
+    beq $s2, 32, print_void
 
-    
+
+
+print_void:
+
 exit:
 
 li $v0, 10
