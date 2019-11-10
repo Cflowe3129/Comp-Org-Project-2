@@ -44,6 +44,9 @@ next_char:
     bge $s2, 97, check_greater_lower #checks if char is >= a
     bge $s2, 88, check_outside_base_2 #checks if char lies outside of base range
     bge $s2, 65, check_greater_upper #checks if char is >= A
+    bge $s2, 58, check_outside_base_3 #checks if char lies outside of base range
+    bge $s2, 48, check_greater_num #checks if char is >= 0
+    bge $s2, 0, check_outside_base_4 #checks if char lies outside of base range
 
     
     addi $s0, $s0, 1 #increment index by 1
@@ -66,6 +69,9 @@ check_greater_upper:
 
     bge $s2, 41, adjust_upper
     j exit
+
+check_greater_num:
+    bge $s2, 30, adjust_num
 
 #LABELS TO CHECK CHARS OUTSIDE OF BASE RANGE
 
