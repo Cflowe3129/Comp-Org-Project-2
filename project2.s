@@ -7,7 +7,8 @@
 	.data
 
     str: .space 1000
-
+    
+    void: .asciiz "Void"
 
 	.text
 
@@ -31,13 +32,16 @@ main:
     syscall
 
 check_char:
-    beq $s2, 9, print_void
-    beq $s2, 10, print_void
-    beq $s2, 32, print_void
-
+    beq $s2, 9, print_void #checks if char is a tab character
+    beq $s2, 10, print_void #checks if char is a newline character
+    beq $s2, 32, print_void #checks if char is a space character
+    
 
 
 print_void:
+    li $v0, 4 #print string
+    la $a0, void
+    syscall
 
 exit:
 
