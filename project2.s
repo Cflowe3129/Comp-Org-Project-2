@@ -25,6 +25,10 @@ main:
 
     move $t0, $zero #initializes register $t0 as the index counter
 
+next_char:
+
+    addi $t0, $t0, 1 #increments counter by 1
+
     lb $s2, 0($s0) #load char value in register $s0 and put it in $s2
 
     li $v0, 11 #print char value
@@ -36,6 +40,8 @@ check_char:
     beq $s2, 10, print_void #checks if char is a newline character
     beq $s2, 32, print_void #checks if char is a space character
     
+    addi $s0, $s0, 1 #increment index by 1
+    bne $t0, 10, next_char #returns to loop1 label if counter in register $s0 != 10
 
 
 print_void:
