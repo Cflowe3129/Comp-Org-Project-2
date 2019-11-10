@@ -51,10 +51,13 @@ next_char:
     ble $t0, 4, next_char #returns to loop1 label if counter in register $s0 != 10
     j exit
 
+adjust_base:
+
+        j print_invalid
 
 check_outside_base_1:
-ble $s2, 127, adjust_base
-j exit
+        ble $s2, 127, adjust_base
+        j exit
 
 
 print_invalid:
