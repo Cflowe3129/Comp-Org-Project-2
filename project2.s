@@ -58,20 +58,24 @@ adjust_base:
 
         j print_invalid
 
+multiply_char:
+    
+    
+
 #LABELS TO CHECK CHARS INSIDE OF BASE RANGE
 
 check_greater_lower:
 
-    bge $s2, 61, adjust_lower
+    bge $s2, 61, multiply_char
     j exit
 
 check_greater_upper:
 
-    bge $s2, 41, adjust_upper
+    bge $s2, 41, multiply_char
     j exit
 
 check_greater_num:
-    bge $s2, 30, adjust_num
+    bge $s2, 30, multiply_char
 
 #LABELS TO CHECK CHARS OUTSIDE OF BASE RANGE
 
