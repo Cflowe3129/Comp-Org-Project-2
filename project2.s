@@ -24,6 +24,7 @@ main:
     syscall
 
     move $t0, $zero #initializes register $t0 as the index counter
+    move $t1, $zero #initializes register $t1 to serve as a boolean operator
 
 next_char:
 
@@ -38,6 +39,12 @@ next_char:
     beq $s2, 9, print_invalid #checks if char is a tab character
     beq $s2, 10, print_invalid #checks if char is a newline character
     beq $s2, 32, print_invalid #checks if char is a space character
+
+    bge $s2, 120, print_invalid #checks if char lies outside of base range
+    bge $s2, 97, check_greater_lower #checks if char is >= a
+    bge $s2, 88, print_invalid #checks if char lies outside of base range
+    bge $s2, 65, check_greater_upper #checks if char is >= A
+
     
     addi $s0, $s0, 1 #increment index by 1
     bge $t0, 6, print_invalid
