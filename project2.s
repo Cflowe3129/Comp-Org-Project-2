@@ -36,15 +36,15 @@ next_char:
     syscall
 
 check_char:
-    beq $s2, 9, print_void #checks if char is a tab character
-    beq $s2, 10, print_void #checks if char is a newline character
-    beq $s2, 32, print_void #checks if char is a space character
+    beq $s2, 9, print_invalid #checks if char is a tab character
+    beq $s2, 10, print_invalid #checks if char is a newline character
+    beq $s2, 32, print_invalid #checks if char is a space character
     
     addi $s0, $s0, 1 #increment index by 1
     bne $t0, 10, next_char #returns to loop1 label if counter in register $s0 != 10
+    j exit
 
-
-print_void:
+print_invalid:
     li $v0, 4 #print string
     la $a0, void
     syscall
