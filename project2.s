@@ -58,7 +58,7 @@ next_char:
 
     
     addi $s0, $s0, 1 #increment index by 1
-    bge $t0, 4, print_invalid
+    bge $t0, 4, void_enter
     ble $t0, 3, next_char #returns to loop1 label if counter in register $s0 != 10
     j exit
 
@@ -114,6 +114,10 @@ print_invalid:
     la $a0, invalid
     syscall
 
+void_enter:
+    li $v0, 4 #print string
+    la $a0, invalid
+    syscall
 exit:
 
     li $v0, 10
