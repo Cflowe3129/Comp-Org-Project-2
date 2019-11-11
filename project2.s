@@ -58,8 +58,9 @@ next_char:
 
     
     addi $s0, $s0, 1 #increment index by 1
-    bge $t0, 4, void_enter
     ble $t0, 3, next_char #returns to loop1 label if counter in register $s0 != 10
+    beq $t0, 4, void_enter
+
     j exit
 
 adjust_base:
@@ -115,6 +116,9 @@ print_invalid:
     syscall
 
 void_enter:
+
+    beq $s2, 9, print_total #checks if char is a tab character
+
     li $v0, 4 #print string
     la $a0, invalid
     syscall
