@@ -10,11 +10,13 @@
     
     invalid: .asciiz "Invalid input"
 
-    one: 27000
+    one: .word 27000
     
-    two: 900
+    two: .word 900
 
-    three: 30
+    three: .word 30
+
+    four: .word 1
 
 	.text
 
@@ -41,10 +43,7 @@ next_char:
 # li $v0, 11 #print char value
 #   move $a0, $s2
 #   syscall
-
-    beq $s2, 9, print_invalid #checks if char is a tab character
-    beq $s2, 10, print_invalid #checks if char is a newline character
-    beq $s2, 32, print_invalid #checks if char is a space character
+    
 
     bge $s2, 120, check_outside_base_1 #checks if char lies outside of base range
     bge $s2, 97, check_greater_lower #checks if char is >= a
@@ -67,7 +66,8 @@ adjust_base:
 #LABELS TO CONDUCT CALCULATIONS FOR EACH CHAR
 multiply_char:
     
-    beq $t0, 1, first_element
+#beq $t0, 1, first_element
+    j next_char
 
 first_element:
     
@@ -90,6 +90,7 @@ check_greater_num:
 #LABELS TO CHECK CHARS OUTSIDE OF BASE RANGE
 
 check_outside_base_1:
+
         ble $s2, 127, adjust_base
         j exit
 
