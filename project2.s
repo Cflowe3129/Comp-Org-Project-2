@@ -121,6 +121,11 @@ second_element:
     j add_char
 
 third_element:
+    
+    lw, $a1, three
+    mult $s2, $a1
+    mflo $s3
+    j add_char
 
 
 #LABELS TO CHECK CHARS INSIDE OF BASE RANGE
