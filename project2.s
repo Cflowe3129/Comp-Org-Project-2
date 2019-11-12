@@ -14,6 +14,11 @@
 #register $s5 will hold the value of the third element after it's been multiplied
 #register $s6 will hold the value of the fourth element after it's been multiplied
 
+#register $t1 will hold the value of the first element before it's been multiplied
+#register $t2 will hold the value of the second element before it's been multiplied
+#register $t3 will hold the value of the third element before it's been multiplied
+#register $t4 will hold the value of the fourth element before it's been multiplied
+
 	.data
 
     str: .space 1000
@@ -85,7 +90,7 @@ adjust_base:
 adjust_num:
 
     addi, $s2, $s2, -48 #convert hex value to decimal
-    j multiply_char
+    j store_values
 
 adjust_lower:
 
@@ -96,6 +101,14 @@ adjust_upper:
 
 addi, $s2, $s2, -55 #convert hex value to decimal
 j multiply_char
+
+store_values:
+    
+    beq $t0, 1, store_one
+
+store_one:
+
+    move $t1, $s2
 
 #LABELS TO CONDUCT CALCULATIONS FOR EACH CHAR
 multiply_char:
