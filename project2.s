@@ -110,13 +110,14 @@ first_element:
     lw, $a1, one
     mult $s2, $a1
     mflo $s3
-    j add_char_one
+    j add_char
 
 second_element:
 
     lw, $a1, one
     mult $s2, $a1
     mflo $s3
+    j add_char
 
 
 #LABELS TO CHECK CHARS INSIDE OF BASE RANGE
@@ -154,6 +155,10 @@ check_outside_base_4:
     j exit
 
 add_char_one:
+    add $s1, $s1, $s3 #adjust total sum of string
+    j continue
+
+add_char:
     add $s1, $s1, $s3 #adjust total sum of string
     j continue
 
