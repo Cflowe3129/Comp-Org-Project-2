@@ -102,6 +102,7 @@ multiply_char:
     
     beq $t0, 1, first_element
     beq $t0, 2, second_element
+    beq $t0, 3, third_element
 
     j continue
 
@@ -114,10 +115,12 @@ first_element:
 
 second_element:
 
-    lw, $a1, one
+    lw, $a1, two
     mult $s2, $a1
     mflo $s3
     j add_char
+
+third_element:
 
 
 #LABELS TO CHECK CHARS INSIDE OF BASE RANGE
