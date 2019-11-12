@@ -137,12 +137,12 @@ store_four:
 #LABELS TO CONDUCT CALCULATIONS FOR EACH CHAR
 multiply_char:
     
-    bge $t0, 4, void_enter
+    beq $t0, 5, void_enter
 
-    beq $t0, 1, one_element
-    beq $t0, 2, two_elements
-    beq $t0, 3, three_elements
-    beq $t0, 4, four_elements
+    beq $t0, 2, one_element
+    beq $t0, 3, two_elements
+    beq $t0, 4, three_elements
+    beq $t0, 5, four_elements
 
     j continue
 
