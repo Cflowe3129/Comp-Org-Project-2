@@ -130,12 +130,16 @@ store_two:
 store_three:
 
     move $t2, $t3
-    move $t4, $t3
+    move $t3, $t4
     move $t4, $s2
     j continue
 
 store_four:
-    move $t1, $s2
+    
+    move $t1, $t2
+    move $t2, $t3
+    move $t3, $t4
+    move $t4, $s2
     j continue
 
 
