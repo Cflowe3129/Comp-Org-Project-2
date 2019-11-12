@@ -122,11 +122,16 @@ store_one:
     j continue
 
 store_two:
-    move $t3, $s2
+    
+    move $t3, $t4
+    move $t4, $s2
     j continue
 
 store_three:
-    move $t3, $s2
+
+    move $t2, $t3
+    move $t4, $t3
+    move $t4, $s2
     j continue
 
 store_four:
