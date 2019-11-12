@@ -82,6 +82,11 @@ adjust_base:
 
         j print_invalid
 
+adjust_num:
+
+    addi, $s2, $s2, -48 #convert hex value to decimal
+    j multiply_char
+
 #LABELS TO CONDUCT CALCULATIONS FOR EACH CHAR
 multiply_char:
     
@@ -107,7 +112,7 @@ check_greater_upper:
     j exit
 
 check_greater_num:
-    bge $s2, 30, multiply_char
+    bge $s2, 30, adjust_num
 
 #LABELS TO CHECK CHARS OUTSIDE OF BASE RANGE
 
