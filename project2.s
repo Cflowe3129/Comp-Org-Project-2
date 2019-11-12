@@ -25,13 +25,13 @@
     
     invalid: .asciiz "Invalid input"
 
-    one: .word 27000
+    one: .word 1
     
-    two: .word 900
+    two: .word 30
 
-    three: .word 30
+    three: .word 900
 
-    four: .word 1
+    four: .word 27000
 
 	.text
 
@@ -139,6 +139,8 @@ multiply_char:
     
     beq $t0, 5, void_enter
 
+continue_2:
+
     beq $t0, 2, one_element
     beq $t0, 3, two_elements
     beq $t0, 4, three_elements
@@ -149,28 +151,27 @@ multiply_char:
 four_elements:
 
     lw, $a1, four
-    mult $s2, $a1
     mflo $s3
     jal add_char
 
 three_elements:
 
     lw, $a1, three
-    mult $s2, $a1
+    mult $t3, $a1
     mflo $s3
     jal add_char
 
 two_elements:
 
     lw, $a1, two
-    mult $s2, $a1
+    mult $t2, $a1
     mflo $s3
     jal add_char
 
 one_element:
     
     lw, $a1, one
-    mult $s2, $a1
+    mult $t1, $a1
     mflo $s3
     jal add_char
 
@@ -225,7 +226,7 @@ add_char:
 
 void_enter:
 
-    beq $s2, 10, print_total #checks if char is a newline character
+    beq $s2, 10, continue_2 #checks if char is a newline character
     
     li $v0, 4 #print string
     la $a0, invalid
