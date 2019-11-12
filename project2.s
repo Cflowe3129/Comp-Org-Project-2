@@ -81,7 +81,10 @@ continue:
 
     bge $t0, 4, void_enter
 
-    j print_total
+    j multiply_char
+
+
+#CONVERTING HEX TO DECIMAL
 
 adjust_base:
 
@@ -101,6 +104,10 @@ adjust_upper:
 
 addi, $s2, $s2, -55 #convert hex value to decimal
 j multiply_char
+
+
+#STORING VALUES IN TEMPORARY REGISTERS
+
 
 store_values:
     
@@ -132,40 +139,47 @@ store_four:
 #LABELS TO CONDUCT CALCULATIONS FOR EACH CHAR
 multiply_char:
     
-    beq $t0, 1, first_element
-    beq $t0, 2, second_element
-    beq $t0, 3, third_element
-    beq $t0, 4, fourth_element
+    beq $t0, 1, one_element
+    beq $t0, 2, two_elements
+    beq $t0, 3, three_elements
+    beq $t0, 4, four_elements
 
     j continue
 
-first_element:
-    
-    lw, $a1, one
+four_elements:
+
+    lw, $a1, four
     mult $s2, $a1
     mflo $s3
     j add_char
 
-second_element:
+three_elements:
+
+    lw, $a1, three
+    mult $s2, $a1
+    mflo $s3
+    j add_char
+
+two_elements:
 
     lw, $a1, two
     mult $s2, $a1
     mflo $s3
     j add_char
 
-third_element:
+one_element:
     
-    lw, $a1, three
+    lw, $a1, one
     mult $s2, $a1
     mflo $s3
     j add_char
 
-fourth_element:
 
-    lw, $a1, four
-    mult $s2, $a1
-    mflo $s3
-    j add_char
+
+
+
+
+
 
 #LABELS TO CHECK CHARS INSIDE OF BASE RANGE
 
@@ -181,6 +195,7 @@ check_greater_upper:
 
 check_greater_num:
     bge $s2, 30, adjust_num
+
 
 #LABELS TO CHECK CHARS OUTSIDE OF BASE RANGE
 
@@ -201,13 +216,12 @@ check_outside_base_4:
     ble $s2, 47, adjust_base
     j exit
 
-add_char_one:
-    add $s1, $s1, $s3 #adjust total sum of string
-    j continue
-
 add_char:
     add $s1, $s1, $s3 #adjust total sum of string
     j continue
+
+
+#PRINT STATEMENTS
 
 void_enter:
 
