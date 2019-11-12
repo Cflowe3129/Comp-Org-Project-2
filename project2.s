@@ -79,8 +79,6 @@ continue:
     lb $s2, 0($s0) #load char value in register $s0 and put it in $s2
     addi $t0, $t0, 1 #increments counter by 1
 
-    bge $t0, 4, void_enter
-
     j multiply_char
 
 
@@ -139,6 +137,8 @@ store_four:
 #LABELS TO CONDUCT CALCULATIONS FOR EACH CHAR
 multiply_char:
     
+    bge $t0, 4, void_enter
+
     beq $t0, 1, one_element
     beq $t0, 2, two_elements
     beq $t0, 3, three_elements
@@ -230,8 +230,12 @@ void_enter:
     li $v0, 4 #print string
     la $a0, invalid
     syscall
+    j exit
 
 print_invalid:
+
+    ble $t0, 4, void_enter
+
     li $v0, 4 #print string
     la $a0, invalid
     syscall
