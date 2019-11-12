@@ -151,28 +151,28 @@ four_elements:
     lw, $a1, four
     mult $s2, $a1
     mflo $s3
-    j add_char
+    jal add_char
 
 three_elements:
 
     lw, $a1, three
     mult $s2, $a1
     mflo $s3
-    j add_char
+    jal add_char
 
 two_elements:
 
     lw, $a1, two
     mult $s2, $a1
     mflo $s3
-    j add_char
+    jal add_char
 
 one_element:
     
     lw, $a1, one
     mult $s2, $a1
     mflo $s3
-    j add_char
+    jal add_char
 
 
 
@@ -218,7 +218,7 @@ check_outside_base_4:
 
 add_char:
     add $s1, $s1, $s3 #adjust total sum of string
-    j continue
+    jr $ra
 
 
 #PRINT STATEMENTS
