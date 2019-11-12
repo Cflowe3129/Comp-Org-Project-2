@@ -3,6 +3,16 @@
 #   = 26 + 7 = 33
 # base value = 33
 
+#register $t0 will serve as a counter to track the loop count
+#register $a0 will hold the address of the output message
+#register $s0 will serve as a counter to track the string index
+#register $s1 will hold the sum of the string
+#register $s2 will hold char value that needs to be manipulated in a function
+
+#register $s3 will hold the value of the first element after it's been multiplied
+#register $s4 will hold the value of the second element after it's been multiplied
+#register $s5 will hold the value of the third element after it's been multiplied
+#register $s6 will hold the value of the fourth element after it's been multiplied
 
 	.data
 
@@ -10,9 +20,9 @@
     
     invalid: .asciiz "Invalid input"
 
-#one: .word 27000
+    one: .word 27000
     
-#two: .word 900
+    two: .word 900
 
     three: .word 30
 
@@ -75,12 +85,15 @@ adjust_base:
 #LABELS TO CONDUCT CALCULATIONS FOR EACH CHAR
 multiply_char:
     
-#beq $t0, 1, first_element
+    beq $t0, 1, first_element
     j continue
 
 first_element:
     
-
+    lw, $a1, one
+    mult $s2, $a1
+    mflo $s3
+    j continue
 #LABELS TO CHECK CHARS INSIDE OF BASE RANGE
 
 check_greater_lower:
