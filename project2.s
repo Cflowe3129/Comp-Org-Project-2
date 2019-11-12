@@ -107,6 +107,7 @@ store_values:
     beq $t0, 1, store_one
     beq $t0, 2, store_two
     beq $t0, 3, store_three
+    beq $t0, 4, store_four
 
     j continue
 
@@ -122,6 +123,11 @@ store_two:
 store_three:
     move $t3, $s2
     j continue
+
+store_four:
+    move $t4, $s2
+    j continue
+
 
 #LABELS TO CONDUCT CALCULATIONS FOR EACH CHAR
 multiply_char:
