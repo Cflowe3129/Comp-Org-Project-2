@@ -76,7 +76,7 @@ continue:
 
     bge $t0, 4, void_enter
 
-    j exit
+    j print_total
 
 adjust_base:
 
@@ -179,7 +179,7 @@ add_char:
 
 void_enter:
 
-    beq $s2, 10, exit #checks if char is a newline character
+    beq $s2, 10, print_total #checks if char is a newline character
     
     li $v0, 4 #print string
     la $a0, invalid
@@ -190,6 +190,11 @@ print_invalid:
     la $a0, invalid
     syscall
 
+print_total:
+
+    li $v0, 1
+    move $a0, $s1
+    syscall
 
 exit:
 
