@@ -160,33 +160,32 @@ continue_2:
 four_elements:
 
     lw, $a1, four
-    mult $t4, $a1
+    mult $t1, $a1
     mflo $s3
     jal add_char
 
 three_elements:
 
     lw, $a1, three
-    mult $t3, $a1
+    mult $t2, $a1
     mflo $s3
     jal add_char
 
 two_elements:
 
     lw, $a1, two
-    mult $t2, $a1
+    mult $t3, $a1
     mflo $s3
     jal add_char
 
 one_element:
     
     lw, $a1, one
-    mult $t1, $a1
+    mult $t4, $a1
     mflo $s3
     jal add_char
 
-
-
+    j print_total
 
 
 
