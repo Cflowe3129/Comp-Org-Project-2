@@ -59,7 +59,11 @@ next_char:
     
     addi $s0, $s0, 1 #increment index by 1
     ble $t0, 3, next_char #returns to loop1 label if counter in register $s0 != 10
-    beq $t0, 4, void_enter
+    
+    lb $s2, 0($s0) #load char value in register $s0 and put it in $s2
+    addi $t0, $t0, 1 #increments counter by 1
+
+    bge $t0, 4, void_enter
 
     j exit
 
@@ -117,7 +121,7 @@ print_invalid:
 
 void_enter:
 
-    beq $s2, 9, print_total #checks if char is a tab character
+    beq $s2, 10, exit #checks if char is a newline character
 
     li $v0, 4 #print string
     la $a0, invalid
