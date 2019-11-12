@@ -87,6 +87,11 @@ adjust_num:
     addi, $s2, $s2, -48 #convert hex value to decimal
     j multiply_char
 
+adjust_lower:
+
+addi, $s2, $s2, -87 #convert hex value to decimal
+j multiply_char
+
 #LABELS TO CONDUCT CALCULATIONS FOR EACH CHAR
 multiply_char:
     
@@ -103,7 +108,7 @@ first_element:
 
 check_greater_lower:
 
-    bge $s2, 61, multiply_char
+    bge $s2, 61, adjust_lower
     j exit
 
 check_greater_upper:
