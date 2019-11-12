@@ -108,7 +108,7 @@ first_element:
     lw, $a1, one
     mult $s2, $a1
     mflo $s3
-    j continue
+    j add_char_one
 #LABELS TO CHECK CHARS INSIDE OF BASE RANGE
 
 check_greater_lower:
@@ -142,6 +142,10 @@ check_outside_base_3:
 check_outside_base_4:
     ble $s2, 47, adjust_base
     j exit
+
+add_char_one:
+    add $s1, $s1, $s3 #adjust total sum of string
+    j continue
 
 void_enter:
 
