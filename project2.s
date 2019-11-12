@@ -118,11 +118,11 @@ store_values:
 
 store_one:
 
-    move $t1, $s2
+    move $t4, $s2
     j continue
 
 store_two:
-    move $t2, $s2
+    move $t3, $s2
     j continue
 
 store_three:
@@ -130,14 +130,14 @@ store_three:
     j continue
 
 store_four:
-    move $t4, $s2
+    move $t1, $s2
     j continue
 
 
 #LABELS TO CONDUCT CALCULATIONS FOR EACH CHAR
 multiply_char:
     
-    beq $t0, 5, void_enter
+    ble $t0, 5, void_enter
 
 continue_2:
 
@@ -151,6 +151,7 @@ continue_2:
 four_elements:
 
     lw, $a1, four
+    mult $t4, $a1
     mflo $s3
     jal add_char
 
