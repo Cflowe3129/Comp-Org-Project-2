@@ -53,10 +53,11 @@ next_char:
     bge $s2, 88, check_outside_base_2 #checks if char lies outside of base range
     bge $s2, 65, check_greater_upper #checks if char is >= A
     bge $s2, 58, check_outside_base_3 #checks if char lies outside of base range
-#bge $s2, 48, check_greater_num #checks if char is >= 0
-#bge $s2, 0, check_outside_base_4 #checks if char lies outside of base range
+    bge $s2, 48, check_greater_num #checks if char is >= 0
+    bge $s2, 0, check_outside_base_4 #checks if char lies outside of base range
 
-    
+continue:
+
     addi $s0, $s0, 1 #increment index by 1
     ble $t0, 3, next_char #returns to loop1 label if counter in register $s0 != 10
     
@@ -75,7 +76,7 @@ adjust_base:
 multiply_char:
     
 #beq $t0, 1, first_element
-    j next_char
+    j continue
 
 first_element:
     
@@ -114,18 +115,20 @@ check_outside_base_4:
     ble $s2, 47, adjust_base
     j exit
 
+void_enter:
+
+    beq $s2, 10, exit #checks if char is a newline character
+    
+    li $v0, 4 #print string
+    la $a0, invalid
+    syscall
+
 print_invalid:
     li $v0, 4 #print string
     la $a0, invalid
     syscall
 
-void_enter:
 
-    beq $s2, 10, exit #checks if char is a newline character
-
-    li $v0, 4 #print string
-    la $a0, invalid
-    syscall
 exit:
 
     li $v0, 10
