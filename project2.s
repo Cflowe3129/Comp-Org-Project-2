@@ -96,12 +96,12 @@ adjust_num:
 adjust_lower:
 
 addi, $s2, $s2, -87 #convert hex value to decimal
-j multiply_char
+j store_values
 
 adjust_upper:
 
 addi, $s2, $s2, -55 #convert hex value to decimal
-j multiply_char
+j store_values
 
 
 #STORING VALUES IN TEMPORARY REGISTERS
