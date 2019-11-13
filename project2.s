@@ -88,6 +88,7 @@ continue:
     lb $s2, 0($s0) #load char value in register $s0 and put it in $s2
     addi $t0, $t0, 1 #increments counter by 1
 
+    jal check_end
     j multiply_char
 
 
@@ -156,7 +157,7 @@ store_four:
 multiply_char:
     
     ble $t0, 5, void_enter
-
+    
 continue_2:
 
     beq $t0, 2, one_element
@@ -244,8 +245,9 @@ add_char:
 
 void_enter:
 
-    beq $s2, 10, continue_2 #checks if char is a newline character
-    
+#beq $s2, 10, continue_2 #checks if char is a newline character
+    beq $s2, 10, check_end #checks if char is a newline character
+
     li $v0, 4 #print string
     la $a0, invalid
     syscall
@@ -275,3 +277,8 @@ increment_blank:
     addi $s0, $s0, 1 #increment index by 1
     lb $s2, 0($s0) #load char value in register $s0 and put it in $s2
     j blank_space
+
+check_end:
+        
+    addi $s0, $s0, 1 #increment index by 1
+    lb $s2, 0($s0) #load char value in register $s0 and put it in $s2
