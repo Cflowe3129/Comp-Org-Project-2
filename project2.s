@@ -262,6 +262,7 @@ print_invalid:
     li $v0, 4 #print string
     la $a0, invalid
     syscall
+    j exit
 
 print_total:
 
@@ -282,13 +283,16 @@ increment_blank:
 
 check_end:
     
+    move $t6, $t5
     lb $t5, 0($s0) #load char value in register $s0 and put it in $t5
 
-    move $t6, $t5
     addi $s0, $s0, 1 #increment index by 1
+    addi $t9, $t9, 1 #increment index by 1
+
     lb $t5, 0($s0) #load char value in register $s0 and put it in $s2
-    beq $t5, 10, check_end
+    bne $t5, 10, check_end
     beq $t5, 9, check_end
     beq $t5, 20, check_end
-    beq $t6, 10, continue_2
-    beq $t6, 20, continue_2
+
+
+    j print_invalid
