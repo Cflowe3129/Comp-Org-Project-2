@@ -335,7 +335,7 @@ check_boolean:
 check_boolean_continued:
 
     beq, $s2, 0, continue_2
-    bge, $t9, 5, print_invalid
+    bge, $t9, 3, print_invalid
     j continue_2
 
 increment:
