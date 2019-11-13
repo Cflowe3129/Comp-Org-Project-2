@@ -19,6 +19,8 @@
 #register $t3 will hold the value of the third element before it's been multiplied
 #register $t4 will hold the value of the fourth element before it's been multiplied
 
+#register $t5 will hold the value of the second to last element
+
 	.data
 
     str: .space 1000
@@ -279,6 +281,11 @@ increment_blank:
     j blank_space
 
 check_end:
-        
+    
+    move $t5, $s0
     addi $s0, $s0, 1 #increment index by 1
     lb $s2, 0($s0) #load char value in register $s0 and put it in $s2
+    beq $s2, 10, check_end
+    beq $s2, 9, check_end
+    beq $s2, 32, check_end
+    j continue_2
