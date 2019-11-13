@@ -48,16 +48,15 @@ main:
 
     move $t0, $zero #initializes register $t0 as the index counter
     move $t1, $zero #initializes register $t1 to serve as a boolean operator
+    lb $s2, 0($s0) #load char value in register $s0 and put it in $s2
 
 blank_space:
 
-    lb $s2, 0($s0) #load char value in register $s0 and put it in $s2
-    addi $s0, $s0, 1 #increment index by 1
+    
 
     beq $s2, 9, increment_blank #checks if char is a tab character
     beq $s2, 10, increment_blank #checks if char is a newline character
     beq $s2, 32, increment_blank #checks if char is a space character
-    j start
 
 next_char:
     
@@ -273,3 +272,6 @@ exit:
 
 increment_blank:
     
+    addi $s0, $s0, 1 #increment index by 1
+    lb $s2, 0($s0) #load char value in register $s0 and put it in $s2
+    j blank_space
