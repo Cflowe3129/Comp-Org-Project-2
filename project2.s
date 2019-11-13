@@ -52,10 +52,12 @@ main:
 blank_space:
 
     lb $s2, 0($s0) #load char value in register $s0 and put it in $s2
+    addi $s0, $s0, 1 #increment index by 1
 
-    beq $s2, 9, blank_space #checks if char is a tab character
-    beq $s2, 10, blank_space #checks if char is a newline character
-    beq $s2, 32, blank_space #checks if char is a space character
+    beq $s2, 9, increment_blank #checks if char is a tab character
+    beq $s2, 10, increment_blank #checks if char is a newline character
+    beq $s2, 32, increment_blank #checks if char is a space character
+    j start
 
 next_char:
     
@@ -65,7 +67,7 @@ next_char:
 
     lb $s2, 0($s0) #load char value in register $s0 and put it in $s2
 
-
+start:
     
     beq $s2, 9, print_invalid #checks if char is a tab character
     beq $s2, 10, print_invalid #checks if char is a newline character
@@ -268,3 +270,6 @@ exit:
 
     li $v0, 10
     syscall
+
+increment_blank:
+    
