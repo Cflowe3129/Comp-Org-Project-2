@@ -306,6 +306,7 @@ check_end:
 
 increment_blank_end:
 
+    move $t6, $t5
     lb $t5, 0($s0) #load char value in register $s0 and put it in $t5
     addi $s0, $s0, 1 #increment index by 1
     lb $s2, 0($s0) #load char value in register $s0 and put it in $s2
@@ -319,19 +320,22 @@ increment_blank_end:
     addi $t9, $t9, 1 #increments counter by 1
 
     
+    bne $s2, 32, check_boolean_continued #checks if char is a space character
 
     j continue_2
 
 
 check_boolean:
 
+    bge $t5, 48, increment
 
     
     jr $ra
 
 check_boolean_continued:
 
-    bge, $t9, 6, print_invalid
+    beq, $s2, 0, continue_2
+    bge, $t9, 5, print_invalid
     j continue_2
 
 increment:
