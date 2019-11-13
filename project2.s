@@ -60,10 +60,11 @@ blank_space:
     beq $s2, 10, increment_blank #checks if char is a newline character
     beq $s2, 32, increment_blank #checks if char is a space character
 
+    addi $t9, $t9, 1 #increments counter by 1
+
 next_char:
     
     
-
     addi $t0, $t0, 1 #increments counter by 1
 
     lb $s2, 0($s0) #load char value in register $s0 and put it in $s2
@@ -285,7 +286,7 @@ increment_blank:
 
 check_end:
     
-    ble $t0, 5, continue_2
+    ble $t0, 5, increment_blank_end
 
     move $t6, $t5
     lb $t5, 0($s0) #load char value in register $s0 and put it in $t5
@@ -301,3 +302,10 @@ check_end:
     bge $t5, 32, print_invalid
 
     j continue_2
+
+
+increment_blank_end:
+
+    addi $s0, $s0, 1 #increment index by 1
+    lb $s2, 0($s0) #load char value in register $s0 and put it in $s2
+    j blank_space
