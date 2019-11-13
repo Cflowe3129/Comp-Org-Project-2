@@ -282,10 +282,12 @@ increment_blank:
 
 check_end:
     
-    move $t5, $s0
+    lb $t5, 0($s0) #load char value in register $s0 and put it in $t5
+
+    move $t6, $t5
     addi $s0, $s0, 1 #increment index by 1
-    lb $s2, 0($s0) #load char value in register $s0 and put it in $s2
+    lb $t5, 0($s0) #load char value in register $s0 and put it in $s2
     beq $s2, 10, check_end
     beq $s2, 9, check_end
-    beq $s2, 32, check_end
+    beq $s2, 20, check_end
     j continue_2
