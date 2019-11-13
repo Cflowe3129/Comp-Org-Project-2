@@ -29,11 +29,11 @@
 
     one: .word 1
     
-    two: .word 30
+    two: .word 33
 
-    three: .word 900
+    three: .word 1089
 
-    four: .word 27000
+    four: .word 35937
 
 	.text
 
@@ -45,7 +45,7 @@ main:
     #READ STRING
     li $v0, 8 #read string
     la $a0, str #load address of string into register $a0
-    li $a1, 1000 #length of expected input including null char
+    li $a1, 1001 #length of expected input including null char
     syscall
 
     move $t0, $zero #initializes register $t0 as the index counter
@@ -249,6 +249,8 @@ void_enter:
 
 #beq $s2, 10, continue_2 #checks if char is a newline character
     beq $s2, 10, check_end #checks if char is a newline character #mute this line and unmute above to revert to working code
+    beq $s2, 9, check_end
+    beq $s2, 32, check_end
 
     li $v0, 4 #print string
     la $a0, invalid
