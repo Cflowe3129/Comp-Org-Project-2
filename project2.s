@@ -90,7 +90,7 @@ continue:
     lb $s2, 0($s0) #load char value in register $s0 and put it in $s2
     addi $t0, $t0, 1 #increments counter by 1
 
-    jal check_end
+    jal check_end #mute this line to revert to working code
     j multiply_char
 
 
@@ -248,7 +248,7 @@ add_char:
 void_enter:
 
 #beq $s2, 10, continue_2 #checks if char is a newline character
-    beq $s2, 10, check_end #checks if char is a newline character
+    beq $s2, 10, check_end #checks if char is a newline character #mute this line and unmute above to revert to working code
 
     li $v0, 4 #print string
     la $a0, invalid
@@ -283,16 +283,19 @@ increment_blank:
 
 check_end:
     
+    ble $t0, 5, continue_2
+
     move $t6, $t5
     lb $t5, 0($s0) #load char value in register $s0 and put it in $t5
 
     addi $s0, $s0, 1 #increment index by 1
     addi $t9, $t9, 1 #increment index by 1
 
-    lb $t5, 0($s0) #load char value in register $s0 and put it in $s2
-    bne $t5, 10, check_end
+
+    beq $t5, 10, check_end
     beq $t5, 9, check_end
-    beq $t5, 20, check_end
+    beq $t5, 32, check_end
 
+    bge $t5, 32, print_invalid
 
-    j print_invalid
+    j continue_2
