@@ -85,6 +85,7 @@ start:
 
 continue:
 
+    lb $t5, 0($s0) #load char value in register $s0 and put it in $t5
     addi $s0, $s0, 1 #increment index by 1
     ble $t0, 3, next_char #returns to loop1 label if counter in register $s0 != 10
     
@@ -306,10 +307,11 @@ check_end:
 
 increment_blank_end:
 
+    lb $t5, 0($s0) #load char value in register $s0 and put it in $t5
     addi $s0, $s0, 1 #increment index by 1
     lb $s2, 0($s0) #load char value in register $s0 and put it in $s2
 
- 
+    jal check_boolean
 
     beq $s2, 9, increment_blank_end #checks if char is a tab character
     beq $s2, 10, increment_blank_end #checks if char is a newline character
@@ -318,8 +320,14 @@ increment_blank_end:
     addi $t9, $t9, 1 #increments counter by 1
 
     
-    
 
     j continue_2
+
+
+check_boolean:
+
+    beq $t5, 10, continue_2
+    
+    jr $ra
 
 
