@@ -308,4 +308,18 @@ increment_blank_end:
 
     addi $s0, $s0, 1 #increment index by 1
     lb $s2, 0($s0) #load char value in register $s0 and put it in $s2
-    j blank_space
+
+ 
+
+    beq $s2, 9, increment_blank_end #checks if char is a tab character
+    beq $s2, 10, increment_blank_end #checks if char is a newline character
+    beq $s2, 32, increment_blank_end #checks if char is a space character
+
+    addi $t9, $t9, 1 #increments counter by 1
+
+    
+    
+
+    j continue_2
+
+
