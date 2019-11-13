@@ -60,11 +60,10 @@ blank_space:
     beq $s2, 10, increment_blank #checks if char is a newline character
     beq $s2, 32, increment_blank #checks if char is a space character
 
-    addi $t9, $t9, 1 #increments counter by 1
 
 next_char:
     
-    
+    addi $t9, $t9, 1 #increments counter by 1
     addi $t0, $t0, 1 #increments counter by 1
 
     lb $s2, 0($s0) #load char value in register $s0 and put it in $s2
@@ -326,8 +325,16 @@ increment_blank_end:
 
 check_boolean:
 
-    beq $t5, 10, continue_2
+
     
     jr $ra
 
+check_boolean_continued:
 
+    bge, $t9, 6, print_invalid
+    j continue_2
+
+increment:
+
+    addi $t9, $t9, 1 #increments counter by 1
+    j check_boolean_continued
