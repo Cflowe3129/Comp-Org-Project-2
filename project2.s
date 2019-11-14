@@ -20,6 +20,7 @@
 #register $t4 will hold the value of the fourth element before it's been multiplied
 
 #register $t5 will hold the value of the second to last element
+#register $t8 will hold the main subprogram address
 
 	.data
 
@@ -48,6 +49,12 @@ main:
     li $a1, 1001 #length of expected input including null char
     syscall
 
+    jal subprogram
+
+ 
+subprogram:
+    
+    move $t8, $ra
     move $t0, $zero #initializes register $t0 as the index counter
     move $t1, $zero #initializes register $t1 to serve as a boolean operator
     lb $s2, 0($s0) #load char value in register $s0 and put it in $s2
@@ -198,7 +205,8 @@ one_element:
     mflo $s3
     jal add_char
 
-    j print_total
+    move $ra, $t8
+    jr $ra
 
 
 
@@ -267,11 +275,6 @@ print_invalid:
     syscall
     j exit
 
-print_total:
-
-    li $v0, 1
-    move $a0, $s1
-    syscall
 
 exit:
 
