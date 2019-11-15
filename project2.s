@@ -272,6 +272,10 @@ void_enter:
     beq $s2, 9, check_end
     beq $s2, 32, check_end
 
+        addi $v0, $zero, -1
+        move $ra, $t8
+        jr $ra
+
 
 
 
