@@ -51,6 +51,12 @@ main:
 
     jal subprogram
 
+    print_total:
+
+    li $v0, 1
+    move $a0, $s1
+    syscall
+    j exit
  
 subprogram:
     
