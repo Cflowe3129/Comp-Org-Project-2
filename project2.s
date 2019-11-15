@@ -61,7 +61,10 @@ main:
     j exit
  
 print_invalid_message:
-
+    li $v0, 4 #print string
+    la $a0, invalid
+    syscall
+    j exit
 
 subprogram:
     
@@ -275,8 +278,6 @@ void_enter:
         addi $v0, $zero, -1
         move $ra, $t8
         jr $ra
-
-
 
 
 print_invalid:
