@@ -51,6 +51,8 @@ main:
 
     jal subprogram
 
+    beq $v0, -1, print_invalid_message
+
     print_total:
 
     li $v0, 1
@@ -58,6 +60,9 @@ main:
     syscall
     j exit
  
+print_invalid_message:
+
+
 subprogram:
     
     move $t8, $ra
@@ -267,19 +272,21 @@ void_enter:
     beq $s2, 9, check_end
     beq $s2, 32, check_end
 
-    li $v0, 4 #print string
-    la $a0, invalid
-    syscall
-    j exit
+
+
 
 print_invalid:
 
     ble $t0, 4, void_enter
 
-    li $v0, 4 #print string
-    la $a0, invalid
-    syscall
-    j exit
+exit_print_invalid:
+
+    addi $v0, $zero, -1
+    move $ra, $t8
+    jr $ra
+
+    
+
 
 
 exit:
